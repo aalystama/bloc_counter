@@ -1,4 +1,5 @@
 import 'package:bloc_counter/bloc/counter_cubit.dart';
+import 'package:bloc_counter/bloc/random_string_cubit.dart';
 import 'package:bloc_counter/ui/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,10 +26,30 @@ class _HomePage extends StatelessWidget {
         title: const Text('BLoC Counter'),
       ),
       body: Center(
-        child: BlocBuilder<CounterCubit, int>(
-          builder: (context, state) {
-            return Counter(state);
-          },
+        child: Column(
+          children: [
+            BlocBuilder<RandomStringCubit, String?>(
+              builder: (context, state) {
+                return RichText(
+                  text: TextSpan(
+                    style: const TextStyle(color: Colors.black),
+                    children: [
+                      const TextSpan(
+                        text: 'Random string value is:',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      TextSpan(text: state ?? 'null')
+                    ],
+                  ),
+                );
+              },
+            ),
+            BlocBuilder<CounterCubit, int>(
+              builder: (context, state) {
+                return Counter(state);
+              },
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
