@@ -22,40 +22,34 @@ class _HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BLoC Counter'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            BlocBuilder<RandomStringCubit, String?>(
-              builder: (context, state) {
-                return RichText(
-                  text: TextSpan(
-                    style: const TextStyle(color: Colors.black),
-                    children: [
-                      const TextSpan(
-                        text: 'Random string value is:',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      TextSpan(text: state ?? 'null')
-                    ],
-                  ),
-                );
-              },
-            ),
-            BlocBuilder<CounterCubit, int>(
-              builder: (context, state) {
-                return Counter(state);
-              },
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<CounterCubit>().increment(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          BlocBuilder<RandomStringCubit, String?>(
+            builder: (context, state) {
+              return RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: const TextStyle(color: Colors.black),
+                  children: [
+                    const TextSpan(
+                      text: 'Random string value is:\n',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    TextSpan(text: state ?? 'null')
+                  ],
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 24),
+          BlocBuilder<CounterCubit, int>(
+            builder: (context, state) {
+              return Counter(state);
+            },
+          ),
+        ],
       ),
     );
   }

@@ -1,4 +1,6 @@
+import 'package:bloc_counter/bloc/counter_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Counter extends StatelessWidget {
   final int value;
@@ -16,6 +18,11 @@ class Counter extends StatelessWidget {
         Text(
           '$value',
           style: Theme.of(context).textTheme.headline4,
+        ),
+        const SizedBox(height: 24),
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () => context.read<CounterCubit>().increment(),
         ),
       ],
     );
