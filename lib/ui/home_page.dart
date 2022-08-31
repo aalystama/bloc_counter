@@ -1,3 +1,5 @@
+import 'dart:js' as js;
+
 import 'package:bloc_counter/bloc/counter_cubit.dart';
 import 'package:bloc_counter/bloc/random_string_cubit.dart';
 import 'package:bloc_counter/ui/counter.dart';
@@ -41,6 +43,13 @@ class _HomePage extends StatelessWidget {
                   ],
                 ),
               );
+            },
+          ),
+          const SizedBox(height: 24),
+          TextButton(
+            child: const Text('Call Android'),
+            onPressed: () {
+              js.context.callMethod('androidApp.makeToast', ['Hello World!']);
             },
           ),
           const SizedBox(height: 24),
